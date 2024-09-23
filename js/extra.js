@@ -1,29 +1,84 @@
 // 選取所有 <span> 元素
 var spans = document.querySelectorAll('span.tts');
 
+// 函數來取得語音列表
+function loadVoices() {
+    const voices = window.speechSynthesis.getVoices();
+  
+    if (voices.length > 0) {
+      console.log('語音列表已加載:', voices);
+    } else {
+      console.log('尚未找到語音，稍後重試。');
+    }
+}
+
+// 檢查語音是否已經加載
+if (speechSynthesis.getVoices().length !== 0) {
+    // 語音庫已經加載，立即調用函數
+    loadVoices();
+} else {
+// 語音庫尚未加載，監聽 voiceschanged 事件
+    window.speechSynthesis.onvoiceschanged = function() {
+        loadVoices();
+    };
+}
+
 // 為每個 <span> 元素添加點擊事件
 spans.forEach(function(span) {
     span.addEventListener('click', function() {
-        // 取得被點擊的 <p> 內的文字
-        var text = span.innerText;
+        // 取得被點擊的 <span> 內的文字
+        var text = span.getAttribute('data-tts');
+        // console.log(text);
+        if (!text)
+        {
+            text = span.innerText;
+        }
+
+        // var text = span.innerText;
         
         // 取得 lang 屬性
         var lang = span.getAttribute('lang');
-
+        // console.log(lang);
+        // var voices = null;
         // 建立 SpeechSynthesisUtterance 物件
         var utterance = new SpeechSynthesisUtterance(text);
-        
+
         // 設定語言
         utterance.lang = lang;
 
-        // 使用 TTS 朗讀文字
-        window.speechSynthesis.speak(utterance);
+        // 選擇聲音
+        // TTS可用的聲音:
+        // Haruka
+        // Ichiro
+        // Sayaka
+        // Ayumi
+
+        // 
+        var name = span.getAttribute('name');
+        var selectedVoice = null;
+        
+        voices = window.speechSynthesis.getVoices().filter(voice => voice.lang===lang);
+        // console.log(voices.length);
+        if (voices.length > 0) {
+            // console.log(name);
+            if (name){
+                selectedVoice = voices.filter(voice => voice.name.includes(name));
+                if (selectedVoice){
+                    utterance.voice = selectedVoice[0];
+                }
+            }
+
+            // 使用 TTS 朗讀文字
+            window.speechSynthesis.speak(utterance);
+        }
+
+
     });
 });
 
 function convertFurigana() {
     // 選擇所有帶有 class 'jp' 的 span
-    const elements = document.querySelectorAll('.jp');
+    const elements = document.querySelectorAll('span.tts, span.hg');
 
     elements.forEach(element => {
         // 提取內容
