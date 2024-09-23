@@ -26,6 +26,12 @@ if (speechSynthesis.getVoices().length !== 0) {
 // 為每個 <span> 元素添加點擊事件
 spans.forEach(function(span) {
     span.addEventListener('click', function() {
+
+        if (window.speechSynthesis.speaking) {
+            console.log("正在講話，請稍候...");
+            window.speechSynthesis.cancel(); // 停止目前的語音
+          }
+
         // 取得被點擊的 <span> 內的文字
         var text = span.getAttribute('data-tts');
         // console.log(text);
