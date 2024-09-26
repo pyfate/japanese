@@ -74,11 +74,11 @@ spans.forEach(function(span) {
                 }
             }
 
-            var strOut = "";
-            for (var i=0; i<voices.length; i++) {
-                strOut += voices[i].name + "\n";
-            }
-            alert(strOut);
+            // var strOut = "";
+            // for (var i=0; i<voices.length; i++) {
+            //     strOut += voices[i].name + "\n";
+            // }
+            // alert(strOut);
 
             // 使用 TTS 朗讀文字
             window.speechSynthesis.speak(utterance);
