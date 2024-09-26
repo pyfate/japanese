@@ -72,9 +72,9 @@ spans.forEach(function(span) {
                 if (selectedVoice){
                     utterance.voice = selectedVoice[0];
                 }
-            } else {
-                utterance.voice = voices[0];
             }
+
+            alert(window.speechSynthesis.getVoices());
 
             // 使用 TTS 朗讀文字
             window.speechSynthesis.speak(utterance);
