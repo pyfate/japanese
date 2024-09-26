@@ -30,7 +30,7 @@ spans.forEach(function(span) {
         if (window.speechSynthesis.speaking) {
             console.log("正在講話，請稍候...");
             window.speechSynthesis.cancel(); // 停止目前的語音
-          }
+        }
 
         // 取得被點擊的 <span> 內的文字
         var text = span.getAttribute('data-tts');
@@ -72,6 +72,8 @@ spans.forEach(function(span) {
                 if (selectedVoice){
                     utterance.voice = selectedVoice[0];
                 }
+            } else {
+                utterance.voice = voices[0];
             }
 
             // 使用 TTS 朗讀文字
