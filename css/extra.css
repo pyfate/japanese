@@ -38,6 +38,11 @@ span.tts {
     background-color: #ff0000; /* 紅色 */
 }
 
+/* 可以根據需要調整 margin 的數值 */
+.md-typeset a.md-button {
+    margin: 4px; 
+}
+
 /* .md-typeset table:not([class]) th,
 .md-typeset table:not([class]) td {
     padding: 4px 4px;
