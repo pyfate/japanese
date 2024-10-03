@@ -102,6 +102,7 @@ th, td {
     border-left: none;
     border-top: none;
     width: auto;
+    vertical-align: middle !important;
 }
 
 .md-typeset__table {
