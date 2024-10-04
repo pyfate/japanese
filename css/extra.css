@@ -40,7 +40,8 @@ span.tts {
 
 /* 可以根據需要調整 margin 的數值 */
 .md-typeset a.md-button {
-    margin: 4px; 
+    margin: 4px;
+    padding: 4px 8px;
 }
 
 /* .md-typeset table:not([class]) th,
